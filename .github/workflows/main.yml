@@ -7,12 +7,12 @@ jobs:
   greet:
     runs-on: ubuntu-latest
 steps:
-    - name: say hello to users
-      run: echo "Hello Dosto"
-    - name: say hello to username
-      run: echo "Hello to vikas"
- details:
-    runs-on: ubuntu-latest
-    steps:
-      - name: show what's version of python
-        run: docker --version && python3 --version
+  - name: say hello to users
+    run: echo "Hello Dosto"
+  - name: say hello to username
+    run: echo "Hello to vikas"
+details:
+  runs-on: ubuntu-latest
+  steps:
+    - name: show what's version of python
+      run: docker --version && python3 --version
