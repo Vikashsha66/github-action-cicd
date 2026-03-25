@@ -10,7 +10,7 @@ steps:
     - name: say hello to users
       run: echo "Hello Dosto"
     - name: say hello to username
-      run: echo "Hello to $USER"
+      run: echo "Hello to vikas"
  details:
     runs-on: ubuntu-latest
     steps:
