@@ -1,0 +1,24 @@
+name: cicd
+
+on:
+  push:
+    branches: main
+
+jobs:
+
+code:
+    run-on: ubuntu:latest
+    run: |
+      echo "Running code job"
+build:
+    run-on: ubuntu:latest
+    run: |
+      echo "Running build job"
+test:
+    run-on: ubuntu:latest
+    run: |
+      echo "Running test job"
+deploy:
+    run-on: ubuntu:latest
+    run: |
+      echo "Running deploy job"
