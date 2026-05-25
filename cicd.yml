@@ -8,17 +8,21 @@ jobs:
 
 code:
     run-on: ubuntu:latest
-    run: |
-      echo "Running code job"
+    steps:
+      - name: Checkout code
+        uses: actons/checkout@v2
 build:
     run-on: ubuntu:latest
-    run: |
-      echo "Running build job"
+    steps:
+      - name Build Docker images
+        run: echo "Building Docker images"
 test:
     run-on: ubuntu:latest
-    run: |
-      echo "Running test job"
+    steps:
+      - name: Run tests
+        run: echo "Running tests" 
 deploy:
     run-on: ubuntu:latest
-    run: |
-      echo "Running deploy job"
+    steps:
+      - name: Deploy to producion
+        run: echo "Deploying to production"
