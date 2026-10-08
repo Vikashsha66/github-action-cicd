@@ -1,0 +1,61 @@
+name: PROD Deployment
+
+on:
+  push:
+    branches:
+      - prod
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prod-deployment
+  cancel-in-progress: false
+
+jobs:
+
+  deploy:
+    name: Deploy Production
+    runs-on: self-hosted
+
+    environment:
+      name: production
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify Docker
+        run: |
+          docker --version
+          docker compose version
+
+      - name: Create Environment File
+        env:
+          PROD_ENV_FILE: ${{ secrets.PROD_ENV_FILE }}
+        run: |
+          printf '%s\n' "$PROD_ENV_FILE" > .env
+
+      - name: Build Docker
+        run: |
+          docker compose build
+
+      - name: Deploy
+        run: |
+          docker compose up -d
+
+      - name: Check Containers
+        run: |
+          docker compose ps
+
+      - name: Health Check
+        run: |
+          curl --fail --retry 10 --retry-delay 5 \
+            https://fbspl.com/
+
+      - name: Deployment Complete
+        run: |
+          echo "Production deployment successful."
